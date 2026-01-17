@@ -5,7 +5,7 @@ function ProductCard({ product }) {
             {
                 <div className="max-w-xs mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-4">
                     <img className="w-full h-48 object-cover" src={product.images}></img>
-                    <div class="p-6">
+                    <div className="p-6">
                         <p className="text-gray-600 mb-4">{product.category.name}</p>
 
                         <h4 className="font-semibold text-lg mb-2 truncate text-black overflow-visible">{product.title}</h4>

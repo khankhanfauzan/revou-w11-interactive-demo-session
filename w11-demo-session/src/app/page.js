@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 export default function Home() {
 
   const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch('https://api.escuelajs.co/api/v1/products')
@@ -16,6 +17,7 @@ export default function Home() {
 
 
         setProducts(data);
+        setLoading(false);
         console.log("data:", data)
 
 
@@ -33,13 +35,16 @@ export default function Home() {
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
 
 
-        <div>
-          {products.map((product) => <>
-            <div key={product.id}>
-              <ProductCard product={product} />
-            </div>
-          </>)}
-        </div>
+
+
+        {
+          loading ? <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+            :
+            <div>
+              {products.map((product) => (<div key={product.id}>
+                <ProductCard product={product} />
+              </div>))}
+            </div>}
         {/* <ProductCard products={products} /> */}
       </main>
     </div>
