@@ -1,8 +1,7 @@
 'use client'
 
-import Image from "next/image";
+import Loadings from "./components/Loadings";
 import ProductCard from "./components/ProductCard";
-
 import { useState, useEffect } from 'react';
 
 export default function Home() {
@@ -19,33 +18,25 @@ export default function Home() {
         setProducts(data);
         setLoading(false);
         console.log("data:", data)
-
-
-
-
       })
       .catch(err => {
-        console.error("Gagal ambil foto:", err)
+        console.error("Gagal ambil products:", err)
       })
   }, [])
 
+  if (loading) {
+    return <Loadings />
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-
-
-
-
+      <main className="flex min-h-screen w-full max-w-7xl flex-col items-center justify-between py-32 px-4 sm:px-8 md:px-16 bg-white dark:bg-black sm:items-start">
         {
-          loading ? <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
-            :
-            <div>
-              {products.map((product) => (<div key={product.id}>
-                <ProductCard product={product} />
-              </div>))}
-            </div>}
-        {/* <ProductCard products={products} /> */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+            {products.map((product) => (<div key={product.id}>
+              <ProductCard product={product} />
+            </div>))}
+          </div>}
       </main>
     </div>
   );
